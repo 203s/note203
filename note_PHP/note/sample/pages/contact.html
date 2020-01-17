@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>お問い合わせ | 株式会社NONO</title>
+<link rel="stylesheet" href="../css/style.css">
+<style type="text/css">
+form {
+	width: 300px;
+	margin: 0 auto;
+	border: 1px solid #ccc;
+	background: #f0f0f0; /*background-color:;のショートハンド*/
+	padding: 1em 2em;
+	box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+}
+
+.req::before {
+	content:"*";
+	color: red;
+}
+</style>
+</head>
+<body>
+
+<div id="page">
+
+<header>
+  <h1><a href="../index.html"><img src="../images/nonologo.png" alt="株式会社NONO" width="206" height="70"></a></h1>
+  <ul>
+    <li><a href="sitemap.html">サイトマップ</a></li>
+    <li><a href="privacy.html">プライバシーポリシー</a></li>
+  </ul>
+  <nav>
+    <ul>
+      <li><a href="../index.html">ホーム</a></li>
+      <li><a href="info.html">お知らせ</a></li>
+      <li><a href="product.html">製品情報</a></li>
+      <li><a href="service.html">サービス</a></li>
+      <li><a href="about.html">会社概要</a></li>
+      <li><a href="contact.html">お問い合わせ</a></li>
+    </ul>
+  </nav>
+  <img src="../images/window.png" alt="" width="800" height="280">
+</header>
+
+<main>
+<h1>お問い合わせ</h1>
+	
+		<form>
+			<p>
+			<label class="req" for="auther">名前</label><br>
+			<input id="auther" type="text" autofocus required> <!--autofocus訪問時に自動でカーソル,requiredで必須入力-->
+			</p>
+			<p>
+			<label class="req" for="tel">電話番号</label><br>
+			<input id="tel" type="text" required pattern="(090|080|070)(-?\d{4}){2}">
+			</p>
+			<p>
+			<label for="email">メールアドレス</label><br>
+			<input id="email" type="text" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}">
+			</p>
+			<p>
+			<textarea cols="30" rows="5" placeholder="ご意見・ご感想をお聞かせください"></textarea>
+			</p>
+			<input type="submit" value="送信">
+			<p>
+			
+			</p>
+			
+		</form>
+		
+</main>
+
+<footer>
+  <p>
+    <small>Copyright &copy; 2019 〇〇 site. All rights reserved.</small>
+  </p>
+</footer>
+
+</div>
+
+</body>
+</html>
