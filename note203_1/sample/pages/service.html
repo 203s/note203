@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>サービス | 株式会社NONO</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+#fruits,
+#fruits tr {
+	border: 1px solid #000;
+	border-collapse: collapse; /*枠線を単線に*/
+}
+
+#fruits th {
+	background-color: lightgreen;
+	color: #fff;
+}
+
+#weather,
+#weather th,
+#weather td{
+	border: 1px solid #000;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+</style>
+</head>
+<body>
+
+<div id="page">
+
+<header>
+  <h1><a href="../index.html"><img src="../images/nonologo.png" alt="株式会社NONO" width="206" height="70"></a></h1>
+  <ul>
+    <li><a href="sitemap.html">サイトマップ</a></li>
+    <li><a href="privacy.html">プライバシーポリシー</a></li>
+  </ul>
+  <nav>
+    <ul>
+      <li><a href="../index.html">ホーム</a></li>
+      <li><a href="info.html">お知らせ</a></li>
+      <li><a href="product.html">製品情報</a></li>
+      <li><a href="service.html">サービス</a></li>
+      <li><a href="about.html">会社概要</a></li>
+      <li><a href="contact.html">お問い合わせ</a></li>
+    </ul>
+  </nav>
+  <img src="../images/window.png" alt="" width="800" height="280">
+</header>
+
+
+<main>
+<h1>サービス</h1>
+<div style="height: 500px;">
+
+<section>	
+<!--果物表--->
+	<!--<table border="1">-->
+	<h2>果物表</h2>
+	<table id="fruits">
+		<tr><th>くだもの</th></tr>
+		<tr><td>みかん</td></tr>
+		<tr><td>りんご</td></tr>
+		<tr><td>バナナ</td></tr>
+	</table>
+</section>	
+
+<section>
+	<h2>天気予報</h2>
+	<!--<table border="1">-->
+	<table id="weather">
+	<tr><th colspan="2">地方</th><th>6/24(土)</th><th>6/25(日)</th></tr>
+	<tr><td rowspan="2">関東</td><td>東京</td><td><img src="../images/ame.gif"></td><td><img src="../images/hare.gif"></td></tr>
+	<tr><td>神奈川</td><td><img src="../images/hare.gif"></td><td><img src="../images/ame.gif"></td></tr>
+	<tr><td>東海</td><td>愛知</td><td><img src="../images/kumori.gif"></td><td><img src="../images/hare.gif"></td></tr>
+	<tr><td rowspan="3">近畿</td><td>大阪</td><td><img src="../images/hare.gif"></td><td><img src="../images/hare.gif"></td></tr>
+	<tr><td>兵庫</td><td><img src="../images/hare.gif"></td><td><img src="../images/kumori.gif"></td></tr>
+	<tr><td>京都</td><td><img src="../images/hare.gif"></td><td><img src="../images/hare.gif"></td></tr>
+	</table>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <p>
+    <small>Copyright &copy; 2019 〇〇 site. All rights reserved.</small>
+  </p>
+</footer>
+
+</div>
+
+</body>
+</html>
