@@ -1,3 +1,9 @@
+<?php
+// PHPエラーチェック・出力(参考URL:https://www.sejuku.net/blog/77760)
+ini_set("display_errors", 1);
+error_reporting(E_ALL);
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -5,7 +11,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/note2.css">
-<link rel="stylesheet" href="css/add_form.css">
+<link rel="stylesheet" href="css/form.css">
 <link rel="stylesheet" href="css/prettify.css"><!-- ソースコードスタイル -->
 <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700&display=swap" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -56,10 +62,10 @@ PDF リンク
 <!-- データベースに接続する|ここから -->
 
 	<?php 
-	$user = 'bokunopo';
-	$password = '203member';
-	$dbName = 'bokunopo_note203';
-	$host = '2001:e42:101:13:59:106:27:155';
+	$user = 'bokunopo';//データベースログインネーム
+	$password = '203member';//データベースログインパス
+	$dbName = 'bokunopo_note203';//データベース名
+	$host = 'mysql740.db.sakura.ne.jp';//確認　https://secure.sakura.ad.jp/rs/cp/sites/database/list
 	$dsn = "mysql:host={$host};dbname={$dbName};charset=utf8";
 
 	try {
