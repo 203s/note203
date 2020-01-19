@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="css/normalize.css">
-<link rel="stylesheet" href="css/note2.css">
+<link rel="stylesheet" href="css/note203.css">
 <link rel="stylesheet" href="css/add_form.css">
 <link rel="stylesheet" href="css/prettify.css"><!-- ソースコードスタイル -->
 <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700&display=swap" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="icon" href="img/icon/証明書アイコン.png">
-<title>note</title>
+<title>note203_MAMP</title>
 <script
   src="https://code.jquery.com/jquery-2.2.4.min.js"
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
