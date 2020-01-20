@@ -58,7 +58,9 @@ PDF リンク
 <!-- エンコードチェックとエスケープ処理|ここまで -->
 
 
-<header>
+
+
+
 <!-- データベースに接続する|ここから -->
 
 	<?php 
@@ -86,6 +88,9 @@ PDF リンク
 	?>
 <!-- データベースに接続する|ここまで -->
 
+
+<header>
+
 <ul class="tabs">
 	<li class="tab current" id="tab-sql"><a href="#sql" style="color: #53001c;">SQL</a></li>
 	<li class="tab" id="tab-php"><a href="#php" style="color: #53001c;">PHP</a></li>
@@ -106,31 +111,6 @@ PDF リンク
 								<a class="pdf" href="redume/SQL/1：データベースの定義(DDL)入門.pdf" target="_blank">PDF</a>
 							</td>
 						</tr>
-						<tr>
-							<td class="tag">USE データベース名;</td>
-							<td>「データベース名」というデータベースを使用</td>
-						</tr>
-						<tr>
-							<td class="tag">SHOW DATABASES;</td>
-							<td>データベースを確認</td>
-						</tr>
-						<tr>
-							<td class="tag">SHOW TABLES;</td>
-							<td>テーブルを確認</td>
-						</tr>
-						<tr>
-							<td class="tag">SHOW COLUMNS FROM テーブル名;</td>
-							<td>テーブルの列の内容を確認</td>
-						</tr>
-						<tr>
-							<td class="tag">ALTER TABLE テーブル名 ADD 列名 INT(データ型) DEFAULT 0;</td>
-							<td>「テーブル名」に列「列名」を追加</td>
-						</tr>
-						<tr>
-							<td class="tag">DROP TABLE テーブル名;</td>
-							<td>テーブルの削除</td>
-						</tr>
-
 					</table>
 
 <!-- 編集フォーム部品 ここから-->
