@@ -45,7 +45,11 @@ a {
     }
 
 header {
+<<<<<<< Updated upstream
     height:50px;
+=======
+    height:68px;
+>>>>>>> Stashed changes
     background-color: #ffffff;
     padding-top: 1px;
     margin-bottom: 60px;
