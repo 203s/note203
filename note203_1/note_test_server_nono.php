@@ -3,67 +3,6 @@
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 ?>
-<!-- フォームにレコードの追加  ここから -->
-<?php
-$tag = $_POST["name"];
-$format = $_POST["format"];
-$text = $_POST["text"];
-$url = $_POST["url"];
-//MySQLデータベースに接続する
-try {
-	$pdo = new PDO($dsn,$user,$password);
-	$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	// SQL文を作る
-	$spl = "INSERT INTO note203_table (tag,format,text,url) VALUES (:tag,:format,:text,:url)";
-	// プリペアドステートメントを作る
-	$stm = $pdo->prepare($sql);
-	// プレースホルダに値をバインドする
-	$stm->bindValue(':tag', $tag, PDO::PARAM_STR);
-	$stm->bindValue(':format', $format, PDO::PARAM_STR);
-	$stm->bindValue(':text', $text, PDO::PARAM_STR);
-	$stm->bindValue(':url', $url, PDO::PARAM_STR);
-	// SQL文を実行する
-	if($stm->execute()){
-		// レコード追加後のレコードリストを取得する
-		$sql = "SELECT * FROM member";
-		$stm = $pdo->prepare($sql);
-		print_r($stm);
-		$stm->execute();//実行
-		//結果の取得(連想配列で受け取る)
-		$result = $stm->fetchAll(PDO::FETCH_ASSOC);
-		//テーブルのタイトル行
-		echo "<table>";
-		echo "<thead><tr>";
-		echo "<th>", "ID", "</th>";
-		echo "<th>", "タグ", "</th>";
-		echo "<th>", "書式", "</th>";
-		echo "<th>", "URL", "</th>";
-		echo "</tr></thead>";
-		// 値を取り出して行に表示する
-		echo "<tbody>";
-		foreach ($result as $row) {
-			// １行ずつテーブルに入れる
-			echo "<tr>";
-			echo "<td>", es($row['id']), "</td>";
-			echo "<td>", es($row['tag']), "</td>";
-			echo "<td>", es($row['format']), "</td>";
-			echo "<td>", es($row['url']), "</td>";
-			echo "</tr>";
-			}
-		echo "</tbody>";
-		echo "</table>";
-		} else {
-			echo'<span class="error">追加エラーがありました</span><br>';
-		};
-	}catch(Exception $e){
-		echo '<span class="error">エラーがありました。</span><br>';
-		echo $e->getMessage();
-	}
-
-
-?>
-<!-- フォームにレコードの追加  ここまで -->
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -87,7 +26,6 @@ try {
 <!--
 リンクURL
 <td><a class="kome" href="●" target="_blank">※</a></td>
-
 
 PDF リンク
 <td><a class="pdf" href="redume/ファイル名" target="_blank">PDF</a></td>
@@ -128,7 +66,7 @@ PDF リンク
 	$user = 'bokunopo';//データベースログインネーム
 	$password = '203member';//データベースログインパス
 	$dbName = 'bokunopo_note203';//データベース名
-	$host = 'mysql740.db.sakura.ne.jp';//確認　https://secure.sakura.ad.jp/rs/cp/sites/database/list
+	$host = 'mysql740.db.sakura.ne.jp';//確認 https://secure.sakura.ad.jp/rs/cp/sites/database/list
 	$dsn = "mysql:host={$host};dbname={$dbName};charset=utf8";
 
 	try {
@@ -149,6 +87,117 @@ PDF リンク
 	?>
 <!-- データベースに接続する|ここまで -->
 
+<?php
+
+// try {
+// 	$pdo = new PDO($dsn,$user,$password);
+// 	$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+// 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// 	// SQL文を作る
+// 	$sql = "SELECT * FROM note203_table";
+// 	// プリペアドステートメントを作る
+// 	$stm = $pdo->prepare($sql);
+// 	// SQL文を実行する
+// 	$stm->execute();
+// 	$result = $stm->fetchAll(PDO::FETCH_ASSOC);
+
+// 	if(count($result)>0){
+// 		//テーブルのタイトル行
+// 		echo "<table>";
+// 		echo "<thead><tr>";
+// 		echo "<th>", "ID", "</th>";
+// 		echo "<th>", "タグ", "</th>";
+// 		echo "<th>", "書式", "</th>";
+// 		echo "<th>", "URL", "</th>";
+// 		echo "</tr></thead>";
+// 		// 値を取り出して行に表示する
+// 		echo "<tbody>";
+// 		foreach ($result as $row) {
+// 			// １行ずつテーブルに入れる
+// 			echo "<tr>";
+// 			echo "<td>", es($row['id']), "</td>";
+// 			echo "<td>", es($row['tag']), "</td>";
+// 			echo "<td>", es($row['format']), "</td>";
+// 			echo "<td>", es($row['url']), "</td>";
+// 			echo "</tr>";
+// 			}
+// 		echo "</tbody>";
+// 		echo "</table>";
+// 		} else {
+// 			echo'<span class="error">追加エラーがありました</span><br>';
+// 		};
+// 	}catch(Exception $e){
+// 		echo '<span class="error">エラーがありました。</span><br>';
+// 		echo $e->getMessage();
+// 	}
+
+
+// フォームにレコードの追加  ここから
+if(!empty($_POST["format"])){
+	$tag = $_POST["tag"];
+	$format = $_POST["format"];
+	$text = $_POST["text"];
+	$url = $_POST["url"];
+	//MySQLデータベースに接続する
+	try {
+		$pdo = new PDO($dsn,$user,$password);
+		$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		// SQL文を作る
+		$sql = "INSERT INTO note203_table (id,tag,format,text,url) VALUES ('',:tag,:format,:text,:url)";
+		// プリペアドステートメントを作る
+		$stm = $pdo->prepare($sql);
+		// プレースホルダに値をバインドする
+		$stm->bindValue(':tag', $tag, PDO::PARAM_STR);
+		$stm->bindValue(':format', $format, PDO::PARAM_STR);
+		$stm->bindValue(':text', $text, PDO::PARAM_STR);
+		$stm->bindValue(':url', $url, PDO::PARAM_STR);
+		// SQL文を実行する
+		$stm->execute();//実行
+
+		if($stm->execute()){
+			// レコード追加後のレコードリストを取得する
+			$sql = "SELECT * FROM note203_table";
+			$stm = $pdo->prepare($sql);
+			$stm->execute();//実行
+			//結果の取得(連想配列で受け取る)
+			$result = $stm->fetchAll(PDO::FETCH_ASSOC);
+			// print_r($result);
+			//テーブルのタイトル行
+			echo "<table>";
+			echo "<thead><tr>";
+			echo "<th>", "ID", "</th>";
+			echo "<th>", "タグ", "</th>";
+			echo "<th>", "書式", "</th>";
+			echo "<th>", "説明", "</th>";
+			echo "<th>", "URL", "</th>";
+			echo "</tr></thead>";
+			// 値を取り出して行に表示する
+			echo "<tbody>";
+			foreach ($result as $row) {
+				// １行ずつテーブルに入れる
+				echo "<tr>";
+				echo "<td>", es($row['id']), "</td>";
+				echo "<td>", es($row['tag']), "</td>";
+				echo "<td>", es($row['format']), "</td>";
+				echo "<td>", es($row['text']), "</td>";
+				echo "<td>", es($row['url']), "</td>";
+				echo "</tr>";
+				}
+			echo "</tbody>";
+			echo "</table>";
+			} else {
+				echo'<span class="error">追加エラーがありました</span><br>';
+			};
+		}catch(Exception $e){
+			echo '<span class="error">エラーがありました。</span><br>';
+			echo $e->getMessage();
+		}
+
+}
+
+
+?>
 
 <header>
 
@@ -194,6 +243,8 @@ PDF リンク
 				</div>
 
 </main>
+
+<!-- フォームにレコードの追加  ここまで -->
 
 
 <!--
