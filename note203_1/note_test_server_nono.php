@@ -23,6 +23,7 @@ error_reporting(E_ALL);
   crossorigin="anonymous"></script> <!-- jQ本体 -->
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script><!-- ソースコードスタイル -->
 </head>
+
 <!--
 リンクURL
 <td><a class="kome" href="●" target="_blank">※</a></td>
