@@ -58,8 +58,6 @@ PDF リンク
 
 <body>
 <header>
-
-
 <!-- データベースに接続する|ここから -->
 
 	<?php 
@@ -87,62 +85,29 @@ PDF リンク
 	?>
 <!-- データベースに接続する|ここまで -->
 
+<ul class="tabs">
+	<li class="tab current" id="tab-sql"><a href="#sql" style="color: #53001c;">SQL</a></li>
+	<li class="tab" id="tab-php"><a href="#php" style="color: #53001c;">PHP</a></li>
+</ul>
+</header>
+<main>
+	<div id="sql">
+		<section class="html">
+		<h1 style="background-color: #5d1614;">SQL</h1>
+
+
+<?php require("getTable.php"); ?>
+
+
 <?php
-
-// try {
-// 	$pdo = new PDO($dsn,$user,$password);
-// 	$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-// 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-// 	// SQL文を作る
-// 	$sql = "SELECT * FROM note203_table";
-// 	// プリペアドステートメントを作る
-// 	$stm = $pdo->prepare($sql);
-// 	// SQL文を実行する
-// 	$stm->execute();
-// 	$result = $stm->fetchAll(PDO::FETCH_ASSOC);
-
-// 	if(count($result)>0){
-// 		//テーブルのタイトル行
-// 		echo "<table>";
-// 		echo "<thead><tr>";
-// 		echo "<th>", "ID", "</th>";
-// 		echo "<th>", "タグ", "</th>";
-// 		echo "<th>", "書式", "</th>";
-// 		echo "<th>", "URL", "</th>";
-// 		echo "</tr></thead>";
-// 		// 値を取り出して行に表示する
-// 		echo "<tbody>";
-// 		foreach ($result as $row) {
-// 			// １行ずつテーブルに入れる
-// 			echo "<tr>";
-// 			echo "<td>", es($row['id']), "</td>";
-// 			echo "<td>", es($row['tag']), "</td>";
-// 			echo "<td>", es($row['format']), "</td>";
-// 			echo "<td>", es($row['url']), "</td>";
-// 			echo "</tr>";
-// 			}
-// 		echo "</tbody>";
-// 		echo "</table>";
-// 		} else {
-// 			echo'<span class="error">追加エラーがありました</span><br>';
-// 		};
-// 	}catch(Exception $e){
-// 		echo '<span class="error">エラーがありました。</span><br>';
-// 		echo $e->getMessage();
-// 	}
-
-
 // フォームにレコードの追加  ここから
-if(!empty($_POST["format"])){
+if(isset($_POST["format"])){
 	$tag = $_POST["tag"];
 	$format = $_POST["format"];
 	$text = $_POST["text"];
 	$url = $_POST["url"];
 	//MySQLデータベースに接続する
 	try {
-		$pdo = new PDO($dsn,$user,$password);
-		$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		// SQL文を作る
 		$sql = "INSERT INTO note203_table (id,tag,format,text,url) VALUES ('',:tag,:format,:text,:url)";
 		// プリペアドステートメントを作る
@@ -153,84 +118,22 @@ if(!empty($_POST["format"])){
 		$stm->bindValue(':text', es($text), PDO::PARAM_STR);
 		$stm->bindValue(':url', es($url), PDO::PARAM_STR);
 		// SQL文を実行する
-		//$stm->execute();実行
-
-		if($stm->execute()){
-			// レコード追加後のレコードリストを取得する
-			$sql = "SELECT * FROM note203_table";
-			$stm = $pdo->prepare($sql);
-			$stm->execute();//実行
-			//結果の取得(連想配列で受け取る)
-			$result = $stm->fetchAll(PDO::FETCH_ASSOC);
-			// print_r($result);
-			//テーブルのタイトル行
-			// echo "<table>";
-			// echo "<thead><tr>";
-			// echo "<th>", "ID", "</th>";
-			// echo "<th>", "タグ", "</th>";
-			// echo "<th>", "書式", "</th>";
-			// echo "<th>", "説明", "</th>";
-			// echo "<th>", "URL", "</th>";
-			// echo "</tr></thead>";
-			// 値を取り出して行に表示する
-			// echo "<tbody>";
-?>
-
-<ul class="tabs">
-	<li class="tab current" id="tab-sql"><a href="#sql" style="color: #53001c;">SQL</a></li>
-	<li class="tab" id="tab-php"><a href="#php" style="color: #53001c;">PHP</a></li>
-</ul>
-</header>
-<main>
-
-<div id="sql">
-	<section class="html">
-		<h1 style="background-color: #5d1614;">SQL</h1>
-				<h4><span class="spanh4">DDL(データ定義言語)</span></h4>
-				<div class="table">
-					<table class="csst" border="1" cellpadding="5">
-						<tr>
-							<th>ID</th>
-							<th>タグ</th>
-							<th>書式</th>
-							<th>説明</th>
-							<th>リンク</th>
-						</tr>
-<?php
-			foreach ($result as $row) {
-				// １行ずつテーブルに入れる
-				echo "<tr>";
-				echo "<td class='tag'>", $row['id'], "</td>";
-				echo "<td>", $row['tag'], "</td>";
-				echo "<td>", $row['format'], "</td>";
-				echo "<td>", $row['text'], "</td>";
-				echo "<td><a class='kome' href='{$row['url']}' target='_blank'>※</a></td>";
-				echo "</tr>";
-				}
-			// echo "</tbody>";
-			// echo "</table>";
-			} else {
-				echo'<span class="error">追加エラーがありました</span><br>';
-			};
+		$stm->execute();
 		}catch(Exception $e){
-			echo '<span class="error">エラーがありました。</span><br>';
-			echo $e->getMessage();
+		echo '<span class="error">エラーがありました。</span><br>';
+		echo $e->getMessage();
 		}
-}
-?>
-					</table>
-						<!-- <tr >
-							<td class="tag">CREATE DATABASE データベース名;</td>
-							<td>「データベース名」というデータベースを作成</td>
-							<td rowspan="7">
-								<a class="pdf" href="redume/SQL/1：データベースの定義(DDL)入門.pdf" target="_blank">PDF</a>
-							</td>
-						</tr> -->
 
+		require("getTable.php");
+		
+	}
+// フォームにレコードの追加  ここまで
+
+?>
 <!-- 編集フォーム部品 ここから-->
 					<div class="form-wrap">
 						<span class="add-button">行を追加</span>
-						<form class="add-form" method="POST" action="<?= es($_SERVER['PHP_SELF'])?>">
+						<form id="form_id" class="add-form" method="POST" action="<?= es($_SERVER['PHP_SELF'])?>">
 							<table class="add-table" border="1" cellpadding="2">
 								<tr>
 									<td><input type="text" name="tag" value="" placeholder="タグ"></td>
@@ -239,16 +142,17 @@ if(!empty($_POST["format"])){
 									<td><input type="text" name="url" value="" placeholder="リンクURL"></td>
 								</tr>
 							</table>
-							<input type="submit" value="追加">
+							<input id="table-form-submit" type="submit" value="追加">
 						</form>
 					</div>
 <!-- 編集フォーム部品 ここまで -->
 
-				</div>
+<script>
+
+</script>
 
 </main>
 
-<!-- フォームにレコードの追加  ここまで -->
 
 
 <!--
@@ -272,7 +176,6 @@ PDF リンク
 -->
 
 <script src="js/jq.js"></script>
-<!-- Code injected by live-server -->
 
 </body>
 

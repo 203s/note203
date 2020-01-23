@@ -196,6 +196,9 @@ dt {
     position: absolute;
     left: 50%;
 }
+.hide {
+    display: none;
+}
 
 /*=====================================
 PC (min-width 768px)

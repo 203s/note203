@@ -26,3 +26,12 @@ $(function(){
 
 
 });
+
+// フォーム送信でテーブルを削除
+// $(function(){
+//     $('#table-form-submit').submit(function(){
+//         // #table-form-submit
+//         $('.table:first').hide();
+//         // '.htnl > .table:first'
+//     });
+// });
