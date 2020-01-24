@@ -27,21 +27,18 @@ try {
 						<th>説明</th>
 						<th>リンク</th>
 					</tr>
-<?php
-					foreach ($result as $row) {
-						// １行ずつテーブルに入れる
-						echo "<tr>";
-						echo "<td class='tag'>", $row['id'], "</td>";
-						echo "<td>", $row['tag'], "</td>";
-						echo "<td>", $row['format'], "</td>";
-						echo "<td>", $row['text'], "</td>";
-						echo "<td><a class='kome' href='{$row['url']}' target='_blank'>※</a></td>";
-						echo "</tr>";
-						}
-					// echo "</tbody>";
-					// echo "</table>";
 
-?>
+				<?php foreach ($result as $row) :?>
+					<tr>
+						<td><?= $row['id'] ;?></td>
+						<td><?= $row['tag'] ;?></td>
+						<td class='tag'><?= $row['format'] ;?></td>
+						<td><?= $row['text'] ;?></td>
+						<td><a class='kome' href='<?= $row['url'] ;?>' target='_blank'>※</a></td>
+					</tr>
+				<?php endforeach; ?>
+
+
 			</table>
 		</div>
 
