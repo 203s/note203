@@ -27,6 +27,30 @@ $(function(){
 
 });
 
+// ajaxでフォームの入力内容をPOST通信
+$(function(){
+    'use strict';
+
+    $('#form_id').on('click', '#table-form-submit1', function(){
+        var tag = $(this).siblings().find('input[name="tag"]').val();
+        var format = $(this).siblings().find('input[name="format"]').val();
+        var text = $(this).siblings().find('input[name="text"]').val();
+        var url = $(this).siblings().find('input[name="url"]').val();
+        //ajax処理
+        $.post(
+            '_ajax/php',
+            {tag: tag, format: format, text: text, url: url,
+            mode: 'addTableRow'},
+            function(res){
+                window.location.reload();
+                console.log('ajaxによるPOST成功')
+            },
+            // 'json'
+        )
+    });
+
+});
+
 // フォーム送信でテーブルを削除
 // $(function(){
 //     $('#table-form-submit').submit(function(){

@@ -151,9 +151,9 @@ table td {
     font-size: 0.9em;
 }
 
-.csst,
-.csst th,
-.csst td {
+.format-table,
+.format-table,
+.format-table td {
     border-collapse: collapse;
     border-color: rgb(219, 213, 201);
     font-size: 0.9em;

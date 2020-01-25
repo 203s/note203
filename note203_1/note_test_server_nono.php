@@ -61,6 +61,7 @@ PDF リンク
 <!-- データベースに接続する|ここから -->
 
 	<?php 
+	
 	$user = 'bokunopo';//データベースログインネーム
 	$password = '203member';//データベースログインパス
 	$dbName = 'bokunopo_note203';//データベース名
@@ -109,7 +110,7 @@ if(isset($_POST["format"])){
 	//MySQLデータベースに接続する
 	try {
 		// SQL文を作る
-		$sql = "INSERT INTO note203_table (id,tag,format,text,url) VALUES ('',:tag,:format,:text,:url)";
+		$sql = "INSERT INTO note203_table1 (id,tag,format,text,url) VALUES ('',:tag,:format,:text,:url)";
 		// プリペアドステートメントを作る
 		$stm = $pdo->prepare($sql);
 		// プレースホルダに値をバインドする

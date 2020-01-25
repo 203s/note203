@@ -1,7 +1,24 @@
+<!-- PHPエラーチェックとPDO接続設定情報の呼び出し -->
+<?php require_once("setting.php");?>
+
+
+<!-- エンコードチェックとエスケープ処理の呼び出し -->
 <?php
-// PHPエラーチェック・出力(参考URL:https://www.sejuku.net/blog/77760)
-ini_set("display_errors", 1);
-error_reporting(E_ALL);
+	require_once("es_cken/es_cken.php");
+	if (!cken($_POST)) {
+		$encoding = mb_internal_encoding();
+		$err = "Encoding Error! The expected encoding is " . $encoding ;
+		exit($err);
+	}
+?>
+<!-- エンコードチェックとエスケープ処理|ここまで -->
+
+<?php 
+	require("pdo_functions.php");
+	$connectDB = new PDOfunctions();
+	$getTable = $connectDB->getTableAll();
+	// var_dump($getTable);
+	// exit;
 ?>
 
 <!DOCTYPE html>
@@ -24,56 +41,20 @@ error_reporting(E_ALL);
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script><!-- ソースコードスタイル -->
 </head>
 
-<!--
-リンクURL
-<td><a class="kome" href="●" target="_blank">※</a></td>
-
-PDF リンク
-<td><a class="pdf" href="redume/ファイル名" target="_blank">PDF</a></td>
-
-サンプルコード
-						<li class="sample">
-							<h4>サンプル名</h4>
-							<div class="code-box2">
-								<pre class="prettyprint">
-									<code>
-									</code>
-								</pre>
-							</div>
-						</li>
--->
-
-<!-- エンコードチェックとエスケープ処理|ここから -->
-	<?php
-	require_once("es_cken/es_cken.php");
-	if (!cken($_POST)) {
-		$encoding = mb_internal_encoding();
-		$err = "Encoding Error! The expected encoding is " . $encoding ;
-		exit($err);
-	}
-	?>
-<!-- エンコードチェックとエスケープ処理|ここまで -->
-
-
 
 <body>
 <header>
 <!-- データベースに接続する|ここから -->
 
-	<?php 
-	$user = 'bokunopo';//データベースログインネーム
-	$password = '203member';//データベースログインパス
-	$dbName = 'bokunopo_note203';//データベース名
-	$host = 'mysql740.db.sakura.ne.jp';//確認 https://secure.sakura.ad.jp/rs/cp/sites/database/list
-	$dsn = "mysql:host={$host};dbname={$dbName};charset=utf8";
+<?php 
 
 	try {
-		$pdo = new PDO($dsn,$user,$password);
+		$pdo = new PDO(DSN,DB_USER,DB_PASS);
 		// プリペアドステートメントのエミュレーションを無効にする
 		$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
 		//例外がスローされる設定にする
 		$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-		echo "<small>データベース{$dbName}に接続しました。</small>";
+		echo '<small>データベースに接続しました。</small>';
 		//接続を解除する
 		$pdo = NULL;
 		// Exeption：例外オブジェクト(エラーに関する様々な情報をもつ) 別名$eに設定している
@@ -94,9 +75,35 @@ PDF リンク
 	<div id="sql">
 		<section class="html">
 		<h1 style="background-color: #5d1614;">SQL</h1>
+		<div class="table">
+			<h4><span class="spanh4">DDL(データ定義言語)</span></h4>
+				<table class="format-table" id="format-table1" border="1" cellpadding="5">
+					<tr>
+						<th>タグ</th>
+						<th>書式</th>
+						<th>説明</th>
+						<th>リンク</th>
+						<th>ID</th>
+					</tr>
+
+				<?php foreach ($getTable as $row) :?>
+					<tr>
+						<td><?= $row->tag ;?></td>
+						<td class='tag'><?= $row->format ;?></td>
+						<td><?= $row->text ;?></td>
+						<td><a class='kome' href='<?= $row->url;?>' target='_blank'>※</a></td>
+						<td><?= $row->id ;?></td>
+					</tr>
+				<?php endforeach; ?>
 
 
-<?php require("getTable.php"); ?>
+			</table>
+		</div>
+
+
+<?php 
+// require("pdo_functions.php");
+ ?>
 
 
 <?php
@@ -109,7 +116,7 @@ if(isset($_POST["format"])){
 	//MySQLデータベースに接続する
 	try {
 		// SQL文を作る
-		$sql = "INSERT INTO note203_table (id,tag,format,text,url) VALUES ('',:tag,:format,:text,:url)";
+		$sql = "INSERT INTO note203_table1 (id,tag,format,text,url) VALUES ('',:tag,:format,:text,:url)";
 		// プリペアドステートメントを作る
 		$stm = $pdo->prepare($sql);
 		// プレースホルダに値をバインドする
@@ -124,7 +131,7 @@ if(isset($_POST["format"])){
 		echo $e->getMessage();
 		}
 
-		require("getTable.php");
+		// require("pdo_functions.php");
 		
 	}
 // フォームにレコードの追加  ここまで
@@ -133,46 +140,23 @@ if(isset($_POST["format"])){
 <!-- 編集フォーム部品 ここから-->
 					<div class="form-wrap">
 						<span class="add-button">行を追加</span>
-						<form id="form_id" class="add-form" method="POST" action="<?= es($_SERVER['PHP_SELF'])?>">
+						<form id="form_id" class="add-form" action="">
 							<table class="add-table" border="1" cellpadding="2">
 								<tr>
 									<td><input type="text" name="tag" value="" placeholder="タグ"></td>
-									<td><input type="text" name="format" value="" placeholder="書式" required></td>
+									<td><input type="text" name="format" value="" placeholder="書式"></td>
 									<td><input type="text" name="text" value="" placeholder="説明"></td>
 									<td><input type="text" name="url" value="" placeholder="リンクURL"></td>
 								</tr>
 							</table>
-							<input id="table-form-submit" type="submit" value="追加">
+							<input id="table-form-submit1" type="button" value="追加">
 						</form>
 					</div>
 <!-- 編集フォーム部品 ここまで -->
 
-<script>
-</script>
 
 </main>
 
-
-
-<!--
-リンクURL
-<td><a class="kome" href="●" target="_blank">※</a></td>
-
-
-PDF リンク
-<td><a class="pdf" href="redume/ファイル名" target="_blank">PDF</a></td>
-
-サンプルコード
-						<li class="sample">
-							<h4>サンプル名</h4>
-							<div class="code-box2">
-								<pre class="prettyprint">
-									<code>
-									</code>
-								</pre>
-							</div>
-						</li>
--->
 
 <script src="js/jq.js"></script>
 

@@ -5,7 +5,7 @@ try {
 	$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	// SQL文を作る
-	$sql = "SELECT * FROM note203_table";
+	$sql = "SELECT * FROM note203_table1";
 	$stm = $pdo->prepare($sql);
 	$stm->execute();//実行
 	//結果の取得(連想配列で受け取る)
@@ -19,7 +19,7 @@ try {
 
 		<div class="table">
 			<h4><span class="spanh4">DDL(データ定義言語)</span></h4>
-				<table class="csst" border="1" cellpadding="5">
+				<table class="format-table" border="1" cellpadding="5">
 					<tr>
 						<th>ID</th>
 						<th>タグ</th>
