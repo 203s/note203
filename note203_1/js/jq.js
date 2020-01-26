@@ -45,13 +45,13 @@ $(function(){
             '_ajax/php',
             {
             mode: 'addTableRow',//処理の種類の分類
-            tableName: tableName, //DBのテーブル名
+            tableName: tableName, //紐づけるDBのテーブル名
             tag: tag, format: format, text: text, url: url,
             },
             function(res){
                 window.location.reload();
-                console.log('ajaxによるPOST成功');
-                console.log(tableName);
+                // console.log('ajaxによるPOST成功');
+                // console.log(tableName);
             },
             // 'json'
         )

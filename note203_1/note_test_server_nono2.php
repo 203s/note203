@@ -11,13 +11,12 @@
 		exit($err);
 	}
 ?>
-<!-- エンコードチェックとエスケープ処理|ここまで -->
 
+<!-- PDOを使った各種機能の呼び出し(実体化) -->
 <?php 
 	require_once("pdo_functions.php");
 	$connectDB = new PDOfunctions();
 	// var_dump($getTable);
-	// exit;
 ?>
 
 <!DOCTYPE html>
@@ -43,27 +42,6 @@
 
 <body>
 <header>
-<!-- データベースに接続する|ここから -->
-
-<?php 
-
-	try {
-		$pdo = new PDO(DSN,DB_USER,DB_PASS);
-		// プリペアドステートメントのエミュレーションを無効にする
-		$pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
-		//例外がスローされる設定にする
-		$pdo->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-		echo '<small>データベースに接続しました。</small>';
-		//接続を解除する
-		$pdo = NULL;
-		// Exeption：例外オブジェクト(エラーに関する様々な情報をもつ) 別名$eに設定している
-		} catch (Exception $e) {
-		echo'<span class="error">エラーがありました。</span><br>';
-		echo $e->getMessage();
-		exit();
-		}
-	?>
-<!-- データベースに接続する|ここまで -->
 
 <ul class="tabs">
 	<li class="tab current" id="tab-sql"><a href="#sql" style="color: #53001c;">SQL</a></li>
@@ -99,15 +77,6 @@
 			</table>
 		</div>
 
-
-<?php 
-// require("pdo_functions.php");
- ?>
-
-
-<?php
-
-?>
 <!-- 編集フォーム部品 ここから-->
 					<div class="form-wrap">
 						<span class="add-button">行を追加</span>
@@ -124,8 +93,8 @@
 							<input id="table111" class="add-form-submit" type="button" value="追加">
 						</form>
 					</div>
-<!-- 編集フォーム部品 ここまで -->
 
+<!-- 編集フォーム部品 ここまで -->
 
 </main>
 

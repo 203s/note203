@@ -8,7 +8,7 @@ class PDOfunctions{
 	private $pdo;
 	
 
-	//PDOでデータベースに接続
+	//PDOでデータベースに接続(実体化したときに実行される)
 	public function __construct(){
 		try{
 			$this->pdo = new \PDO(DSN,DB_USER,DB_PASS);
@@ -22,9 +22,10 @@ class PDOfunctions{
 
 	//DBからデータの取得
 	public function getTableAll($tableName){
-		// テーブル名にはbindValue出来ないのでif文で場合分け
-		if($tableName == "table111"){
-		$sql = "SELECT * FROM table111";
+		// テーブル名にはbindValue出来ないのでswitch文で場合分け
+		switch($tableName){
+			case 'table111':
+				$sql = "SELECT * FROM table111";
 		}
 		$stm = $this->pdo->prepare($sql);
 		// $stm->bindValue(':tname', 'table111', PDO::PARAM_STR);
@@ -51,17 +52,18 @@ class PDOfunctions{
 			throw new \Exception('format not set!');
 		}
 
+		$tableName = $_POST["tableName"];
 		$tag = $_POST["tag"];
 		$format = $_POST["format"];
 		$text = $_POST["text"];
 		$url = $_POST["url"];
 
-		// テーブル名にはbindValue出来ないのでif文で場合分け
-		if($_POST['tableName'] = 'table111'){
+		// テーブル名にはbindValue出来ないのでswitch文で場合分け
+		switch($tableName){
 		//下の「id」に対応する値はDBの設定でオートインクリメント(数値が自動で振られる)にしているので空白で送信する
-		$sql = "INSERT INTO table111 (id,tag,format,text,url) VALUES ('',:tag,:format,:text,:url)";
+			case 'table111':
+				$sql = "INSERT INTO table111 (id,tag,format,text,url) VALUES ('',:tag,:format,:text,:url)";
 		}
-
 		$stm = $this->pdo->prepare($sql);
 		// プレースホルダに値をバインドする
 		$stm->bindValue(':tag', es($tag), PDO::PARAM_STR);
