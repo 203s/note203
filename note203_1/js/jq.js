@@ -31,19 +31,27 @@ $(function(){
 $(function(){
     'use strict';
 
-    $('#form_id').on('click', '#table-form-submit1', function(){
+    $('.add-form').on('click', '.add-form-submit', function(){
+        //idより変更するDBのテーブル名を取得(ボタンのid名は送信したいテーブル名にしておく)
+        var tableName = $(this).attr("id");
+        // 入力フォームそれぞれのvalueの値を取得
         var tag = $(this).siblings().find('input[name="tag"]').val();
         var format = $(this).siblings().find('input[name="format"]').val();
         var text = $(this).siblings().find('input[name="text"]').val();
         var url = $(this).siblings().find('input[name="url"]').val();
+
         //ajax処理
         $.post(
             '_ajax/php',
-            {tag: tag, format: format, text: text, url: url,
-            mode: 'addTableRow'},
+            {
+            mode: 'addTableRow',//処理の種類の分類
+            tableName: tableName, //DBのテーブル名
+            tag: tag, format: format, text: text, url: url,
+            },
             function(res){
                 window.location.reload();
-                console.log('ajaxによるPOST成功')
+                console.log('ajaxによるPOST成功');
+                console.log(tableName);
             },
             // 'json'
         )
@@ -51,11 +59,3 @@ $(function(){
 
 });
 
-// フォーム送信でテーブルを削除
-// $(function(){
-//     $('#table-form-submit').submit(function(){
-//         // #table-form-submit
-//         $('.table:first').hide();
-//         // '.htnl > .table:first'
-//     });
-// });

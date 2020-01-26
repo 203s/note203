@@ -14,9 +14,8 @@
 <!-- エンコードチェックとエスケープ処理|ここまで -->
 
 <?php 
-	require("pdo_functions.php");
+	require_once("pdo_functions.php");
 	$connectDB = new PDOfunctions();
-	$getTable = $connectDB->getTableAll();
 	// var_dump($getTable);
 	// exit;
 ?>
@@ -85,8 +84,8 @@
 						<th>リンク</th>
 						<th>ID</th>
 					</tr>
-
-				<?php foreach ($getTable as $row) :?>
+				<?php $getTable111 = $connectDB->getTableAll("table111"); ?>
+				<?php foreach ($getTable111 as $row) :?>
 					<tr>
 						<td><?= $row->tag ;?></td>
 						<td class='tag'><?= $row->format ;?></td>
@@ -107,40 +106,12 @@
 
 
 <?php
-// フォームにレコードの追加  ここから
-if(isset($_POST["format"])){
-	$tag = $_POST["tag"];
-	$format = $_POST["format"];
-	$text = $_POST["text"];
-	$url = $_POST["url"];
-	//MySQLデータベースに接続する
-	try {
-		// SQL文を作る
-		$sql = "INSERT INTO note203_table1 (id,tag,format,text,url) VALUES ('',:tag,:format,:text,:url)";
-		// プリペアドステートメントを作る
-		$stm = $pdo->prepare($sql);
-		// プレースホルダに値をバインドする
-		$stm->bindValue(':tag', es($tag), PDO::PARAM_STR);
-		$stm->bindValue(':format', es($format), PDO::PARAM_STR);
-		$stm->bindValue(':text', es($text), PDO::PARAM_STR);
-		$stm->bindValue(':url', es($url), PDO::PARAM_STR);
-		// SQL文を実行する
-		$stm->execute();
-		}catch(Exception $e){
-		echo '<span class="error">エラーがありました。</span><br>';
-		echo $e->getMessage();
-		}
-
-		// require("pdo_functions.php");
-		
-	}
-// フォームにレコードの追加  ここまで
 
 ?>
 <!-- 編集フォーム部品 ここから-->
 					<div class="form-wrap">
 						<span class="add-button">行を追加</span>
-						<form id="form_id" class="add-form" action="">
+						<form id="tableform-id1-1" class="add-form" action="">
 							<table class="add-table" border="1" cellpadding="2">
 								<tr>
 									<td><input type="text" name="tag" value="" placeholder="タグ"></td>
@@ -149,7 +120,8 @@ if(isset($_POST["format"])){
 									<td><input type="text" name="url" value="" placeholder="リンクURL"></td>
 								</tr>
 							</table>
-							<input id="table-form-submit1" type="button" value="追加">
+							<!-- 送信ボタンのidを使って出力先のDBのテーブル名を指定 -->
+							<input id="table111" class="add-form-submit" type="button" value="追加">
 						</form>
 					</div>
 <!-- 編集フォーム部品 ここまで -->

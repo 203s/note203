@@ -21,9 +21,16 @@ class PDOfunctions{
 	}
 
 	//DBからデータの取得
-	public function getTableAll(){
-		$stmt = $this->pdo->query("SELECT * FROM note203_table1");
-		return $stmt->fetchAll(\PDO::FETCH_OBJ);
+	public function getTableAll($tableName){
+		// テーブル名にはbindValue出来ないのでif文で場合分け
+		if($tableName == "table111"){
+		$sql = "SELECT * FROM table111";
+		}
+		$stm = $this->pdo->prepare($sql);
+		// $stm->bindValue(':tname', 'table111', PDO::PARAM_STR);
+		// SQL文を実行する
+		$stm->execute();
+		return $stm->fetchAll(\PDO::FETCH_OBJ);
 	}
 
 	//入力されたフォーム毎の処理の振り分け
@@ -48,10 +55,13 @@ class PDOfunctions{
 		$format = $_POST["format"];
 		$text = $_POST["text"];
 		$url = $_POST["url"];
-		
-		// SQL文を作る
-		$sql = "INSERT INTO note203_table1 (id,tag,format,text,url) VALUES ('',:tag,:format,:text,:url)";
-		// プリペアドステートメントを作る
+
+		// テーブル名にはbindValue出来ないのでif文で場合分け
+		if($_POST['tableName'] = 'table111'){
+		//下の「id」に対応する値はDBの設定でオートインクリメント(数値が自動で振られる)にしているので空白で送信する
+		$sql = "INSERT INTO table111 (id,tag,format,text,url) VALUES ('',:tag,:format,:text,:url)";
+		}
+
 		$stm = $this->pdo->prepare($sql);
 		// プレースホルダに値をバインドする
 		$stm->bindValue(':tag', es($tag), PDO::PARAM_STR);
