@@ -10,8 +10,8 @@
         try{
             $res = $connectDB->post();
             //データのタイプを指定
-            header('Content-Type: application/json');
-            echo json_encode($res);
+            // header('Content-Type: application/json');
+            // echo json_encode($res);
             exit;
         }catch(Exception $e){
             header($_SERVER['SERVER_PROTOCOL'] . ' 500 Internal Server Error', true, 500);

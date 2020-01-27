@@ -41,8 +41,6 @@
 
 <body>
 <header>
-	あああああああああああああああああああああああ
-
 <ul class="tabs">
 	<li class="tab current" id="tab-sql"><a href="#sql" style="color: #53001c;">SQL</a></li>
 	<li class="tab" id="tab-php"><a href="#php" style="color: #53001c;">PHP</a></li>
@@ -57,23 +55,35 @@
 			<!-- 表の表示 ここから-->
 				<table class="format-table" id="format-table1" border="1" cellpadding="5">
 					<tr>
-						<th>タグ</th>
+						<th>分類</th>
 						<th>書式</th>
 						<th>説明</th>
 						<th>リンク</th>
+						<th>編集</th>
 						<th>ID</th>
 					</tr>
 				<?php 
 					$getTable111 = $connectDB->getTableAll("table111"); 
-					// var_dump($getTable111);
+					// print_r($getTable111);
 				?>
 				<?php foreach ($getTable111 as $row) :?>
 					<tr>
-						<td><?= $row['tag'] ;?></td>
-						<td class='tag'><?= $row['format'] ;?></td>
-						<td><?= $row['text'] ;?></td>
-						<td><a class='kome' href='<?= $row['url'];?>' target='_blank'>※</a></td>
-						<td><?= $row['id'] ;?></td>
+						<td>
+							<?= $row['tag'] ;?>
+						</td>
+						<td class='tag'>
+							<?= $row['format'] ;?>
+						</td>
+						<td>
+							<?= $row['text'] ;?>
+						</td>
+						<td class="url-cell">
+							<a class='kome' href='<?= $row['url'];?>' target='_blank'><?php if($row['url'] != ''){echo ('※');} ?></a>
+						</td>
+						<td class="edit-cell">
+							<i class="fa fa-times-circle fa-lg "  name="table111"aria-hidden="true"></i>
+						</td>
+						<td class="id-cell"><?= $row['id'] ;?></td>
 					</tr>
 				<?php endforeach; ?>
 			</table>
@@ -86,14 +96,14 @@
 						<form id="tableform-id1-1" class="add-form" action="">
 							<table class="add-table" border="1" cellpadding="2">
 								<tr>
-									<td><input type="text" name="tag" value="" placeholder="タグ"></td>
+									<td><input type="text" name="tag" value="" placeholder="分類"></td>
 									<td><input type="text" name="format" value="" placeholder="書式"></td>
 									<td><input type="text" name="text" value="" placeholder="説明"></td>
 									<td><input type="text" name="url" value="" placeholder="リンクURL"></td>
 								</tr>
 							</table>
-							<!-- 送信ボタンのidを使って出力先のDBのテーブル名を指定 -->
-							<input id="table111" class="add-form-submit" type="button" value="追加">
+							<!-- 送信ボタンのnameを使って出力先のDBのテーブル名を指定 -->
+							<input id="table111" name="table111" class="add-form-submit" type="button" value="追加">
 						</form>
 					</div>
 

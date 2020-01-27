@@ -143,13 +143,6 @@ table {
 table td {
     height: 20px;
 }
-.htmlt,
-.htmlt th,
-.htmlt td {
-    border-collapse: collapse;
-    border-color: rgb(224, 219, 210);
-    font-size: 0.9em;
-}
 
 .format-table,
 .format-table,
@@ -159,6 +152,17 @@ table td {
     font-size: 0.9em;
 
 }
+    .url-cell,
+    .edit-cell{
+        text-align: center;
+    }
+        .fa-times-circle{
+            color: #8b8b8b;
+        }
+        .fa-times-circle:hover{
+            color: #e47575;
+            cursor: pointer;
+        }
 ul:not(ol)  {
     list-style-image: url('../img/marker-gray.png');
 

@@ -32,6 +32,7 @@ class PDOfunctions{
 		return $stm->fetchAll(\PDO::FETCH_ASSOC);
 	}
 
+
 	//入力されたフォーム毎の処理の振り分け
 	public function post(){
 		if(!isset($_POST['mode'])){
@@ -41,8 +42,13 @@ class PDOfunctions{
 		switch($_POST['mode']){
 			case 'addTableRow':
 				return $this->_addTableRow();
+
+			case 'deleteRow':
+				return $this->_deleteTableRow();
 		}
 	}
+
+
 
 	//テーブルに行追加する機能
 	private function _addTableRow(){
@@ -71,6 +77,20 @@ class PDOfunctions{
 		// SQL文を実行する
 		$stm->execute();
 
+	}
+
+	//テーブルに行追加する機能
+	private function _deleteTableRow(){
+
+		$tableName = $_POST["tableName"];
+		$id = $_POST["id"];
+		switch($tableName){
+				case 'table111':
+					$sql = "DELETE FROM table111 WHERE id = :id;";
+			}
+		$stm = $this->pdo->prepare($sql);
+		$stm->bindValue(':id', es($id), PDO::PARAM_STR);
+		$stm->execute();
 	}
 }
 
