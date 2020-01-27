@@ -28,10 +28,8 @@ class PDOfunctions{
 				$sql = "SELECT * FROM table111";
 		}
 		$stm = $this->pdo->prepare($sql);
-		// $stm->bindValue(':tname', 'table111', PDO::PARAM_STR);
-		// SQL文を実行する
 		$stm->execute();
-		return $stm->fetchAll(\PDO::FETCH_OBJ);
+		return $stm->fetchAll(\PDO::FETCH_ASSOC);
 	}
 
 	//入力されたフォーム毎の処理の振り分け

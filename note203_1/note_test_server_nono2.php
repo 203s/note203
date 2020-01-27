@@ -16,7 +16,6 @@
 <?php 
 	require_once("pdo_functions.php");
 	$connectDB = new PDOfunctions();
-	// var_dump($getTable);
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +41,7 @@
 
 <body>
 <header>
+	あああああああああああああああああああああああ
 
 <ul class="tabs">
 	<li class="tab current" id="tab-sql"><a href="#sql" style="color: #53001c;">SQL</a></li>
@@ -54,6 +54,7 @@
 		<h1 style="background-color: #5d1614;">SQL</h1>
 		<div class="table">
 			<h4><span class="spanh4">DDL(データ定義言語)</span></h4>
+			<!-- 表の表示 ここから-->
 				<table class="format-table" id="format-table1" border="1" cellpadding="5">
 					<tr>
 						<th>タグ</th>
@@ -62,19 +63,21 @@
 						<th>リンク</th>
 						<th>ID</th>
 					</tr>
-				<?php $getTable111 = $connectDB->getTableAll("table111"); ?>
+				<?php 
+					$getTable111 = $connectDB->getTableAll("table111"); 
+					// var_dump($getTable111);
+				?>
 				<?php foreach ($getTable111 as $row) :?>
 					<tr>
-						<td><?= $row->tag ;?></td>
-						<td class='tag'><?= $row->format ;?></td>
-						<td><?= $row->text ;?></td>
-						<td><a class='kome' href='<?= $row->url;?>' target='_blank'>※</a></td>
-						<td><?= $row->id ;?></td>
+						<td><?= $row['tag'] ;?></td>
+						<td class='tag'><?= $row['format'] ;?></td>
+						<td><?= $row['text'] ;?></td>
+						<td><a class='kome' href='<?= $row['url'];?>' target='_blank'>※</a></td>
+						<td><?= $row['id'] ;?></td>
 					</tr>
 				<?php endforeach; ?>
-
-
 			</table>
+			<!-- 表の表示 ここまで-->
 		</div>
 
 <!-- 編集フォーム部品 ここから-->
