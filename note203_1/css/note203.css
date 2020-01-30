@@ -144,23 +144,34 @@ table td {
     height: 20px;
 }
 
+table th {
+    color: #5c5c5c;
+}
+
 .format-table,
 .format-table,
 .format-table td {
     border-collapse: collapse;
-    border-color: rgb(219, 213, 201);
+    border-color: rgb(199, 199, 199);
     font-size: 0.9em;
 
 }
     .url-cell,
     .edit-cell{
         text-align: center;
+        color: #b1b0b0;
+
     }
-        .fa-times-circle{
-            color: #8b8b8b;
+        .fa-minus-square:hover{
+            color: #c55959;
+            cursor: pointer;
         }
-        .fa-times-circle:hover{
-            color: #e47575;
+        .fa-pencil-square:hover{
+            color: #74b690;
+            cursor: pointer;
+        }
+        .fa-plus-square:hover{
+            color: #5b8bc2;
             cursor: pointer;
         }
 ul:not(ol)  {

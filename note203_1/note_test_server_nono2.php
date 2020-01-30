@@ -58,8 +58,8 @@
 						<th>分類</th>
 						<th>書式</th>
 						<th>説明</th>
-						<th>リンク</th>
-						<th>編集</th>
+						<th></th>
+						<th></th>
 						<th>ID</th>
 					</tr>
 				<?php 
@@ -67,7 +67,7 @@
 					// print_r($getTable111);
 				?>
 				<?php foreach ($getTable111 as $row) :?>
-					<tr>
+					<tr class="data-row">
 						<td>
 							<?= $row['tag'] ;?>
 						</td>
@@ -78,15 +78,26 @@
 							<?= $row['text'] ;?>
 						</td>
 						<td class="url-cell">
-							<a class='kome' href='<?= $row['url'];?>' target='_blank'><?php if($row['url'] != ''){echo ('※');} ?></a>
+							<a class='kome' href='<?= $row['url'];?>' target='_blank'><?php if($row['url'] != ''){echo ('<i class="fa fa-external-link fa-lg " title="別ウィンドウで参考ページを開く" aria-hidden="true"></i></i>');} ?></a>
 						</td>
 						<td class="edit-cell">
-							<i class="fa fa-times-circle fa-lg "  name="table111"aria-hidden="true"></i>
+							<i class="fa fa-minus-square fa-lg " title="この行を削除" name="table111"aria-hidden="true"></i> <i class="fa fa-pencil-square fa-lg" title="この行を編集" aria-hidden="true"></i> <i class="fa fa-plus-square fa-lg" title="この下に1行追加" aria-hidden="true"></i>
 						</td>
 						<td class="id-cell"><?= $row['id'] ;?></td>
 					</tr>
+					<tr class="edit-row">
+						<td colspan="5">
+							↑上の行を編集
+						</td>
+					</tr>
+					<tr class="add-row">
+						<td colspan="5">
+							ここに1行追加
+						</td>
+					</tr>
 				<?php endforeach; ?>
 			</table>
+			
 			<!-- 表の表示 ここまで-->
 		</div>
 
@@ -99,7 +110,7 @@
 									<td><input type="text" name="tag" value="" placeholder="分類"></td>
 									<td><input type="text" name="format" value="" placeholder="書式"></td>
 									<td><input type="text" name="text" value="" placeholder="説明"></td>
-									<td><input type="text" name="url" value="" placeholder="リンクURL"></td>
+									<td><input type="text" name="url" value="" placeholder="参考ページURL"></td>
 								</tr>
 							</table>
 							<!-- 送信ボタンのnameを使って出力先のDBのテーブル名を指定 -->

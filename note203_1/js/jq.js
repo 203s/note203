@@ -28,16 +28,22 @@ $(function(){
 
 });
 
-// //URLリンク(※)の表示非表示
-// $(function(){
-//     'use strict';
+// //編集行の表示
+$(function(){
+    'use strict';
 
-//     var url = $('.kome').attr('href');
-//     // $("h4").html(url);
-//     if(url === ""){
-//         $('.kome').addClass('hide');
-//     }
-// });
+    $('.edit-row').hide();
+    $('.add-row').hide();
+
+    $('.fa-pencil-square').click(function(){
+        $('.add-row').hide();      
+        $(this).closest('.data-row').next().toggle();
+    });
+    $('.fa-plus-square').click(function(){
+        $('.edit-row').hide();
+        $(this).closest('.data-row').next().next().toggle();
+    });
+});
 
 
 //===============================================================
@@ -79,7 +85,7 @@ $(function(){
 //'deleteRow'(表から指定の行削除)
 $(function(){
     'use strict';
-    $('.fa-times-circle').on('click',function(){
+    $('.fa-minus-square').on('click',function(){
         // 確認画面
         if(confirm('指定した行を削除しますか？')){
             
