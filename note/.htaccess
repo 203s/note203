@@ -1,0 +1,8 @@
+DirectoryIndex index.html index.htm index.shtml index.php index.cgi
+Options -Indexes
+AuthUserFile /home/bokunopo/www/note/.htpasswd
+AuthType Basic
+AuthName "Web access"
+Require valid-user
+Satisfy all
+Order deny,allow

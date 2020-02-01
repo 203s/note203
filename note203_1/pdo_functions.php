@@ -25,7 +25,7 @@ class PDOfunctions{
 		// テーブル名にはbindValue出来ないのでswitch文で場合分け
 		switch($tableName){
 			case 'table111':
-				$sql = "SELECT * FROM table111";
+				$sql = "SELECT * FROM table111 ORDER BY id;";
 		}
 		$stm = $this->pdo->prepare($sql);
 		$stm->execute();
@@ -45,12 +45,18 @@ class PDOfunctions{
 
 			case 'deleteRow':
 				return $this->_deleteTableRow();
+
+			case 'editTableRow':
+				return $this->_editTableRow();
+
+			case 'insertTableRow':
+				return $this->_insertTableRow();
 		}
 	}
 
 
 
-	//テーブルに行追加する機能
+	//テーブルの最下行に追加する機能
 	private function _addTableRow(){
 		if(!isset($_POST['format'])){
 			throw new \Exception('format not set!');
@@ -61,12 +67,12 @@ class PDOfunctions{
 		$format = $_POST["format"];
 		$text = $_POST["text"];
 		$url = $_POST["url"];
+		$id = $_POST["id"];
 
 		// テーブル名にはbindValue出来ないのでswitch文で場合分け
 		switch($tableName){
-		//下の「id」に対応する値はDBの設定でオートインクリメント(数値が自動で振られる)にしているので空白で送信する
 			case 'table111':
-				$sql = "INSERT INTO table111 (id,tag,format,text,url) VALUES ('',:tag,:format,:text,:url)";
+				$sql = "INSERT INTO table111 (tag,format,text,url,id) VALUES (:tag,:format,:text,:url,:id)";
 		}
 		$stm = $this->pdo->prepare($sql);
 		// プレースホルダに値をバインドする
@@ -74,12 +80,13 @@ class PDOfunctions{
 		$stm->bindValue(':format', es($format), PDO::PARAM_STR);
 		$stm->bindValue(':text', es($text), PDO::PARAM_STR);
 		$stm->bindValue(':url', es($url), PDO::PARAM_STR);
+		$stm->bindValue(':id', es($id+1), PDO::PARAM_INT);
 		// SQL文を実行する
 		$stm->execute();
 
 	}
 
-	//テーブルに行追加する機能
+	//テーブルの行削除機能
 	private function _deleteTableRow(){
 
 		$tableName = $_POST["tableName"];
@@ -91,6 +98,64 @@ class PDOfunctions{
 		$stm = $this->pdo->prepare($sql);
 		$stm->bindValue(':id', es($id), PDO::PARAM_STR);
 		$stm->execute();
+	}
+
+	//テーブルの指定行編集
+	private function _editTableRow(){
+
+		$tableName = $_POST["tableName"];
+		$id = $_POST["id"];
+
+		$tag = $_POST["tag"];
+		$format = $_POST["format"];
+		$text = $_POST["text"];
+		$url = $_POST["url"];
+
+		switch($tableName){
+				case 'table111':
+					$sql = "UPDATE table111 SET tag = :tag, format = :format, text = :text, url = :url WHERE id = :id;";
+			}
+		$stm = $this->pdo->prepare($sql);
+
+		$stm->bindValue(':tag', es($tag), PDO::PARAM_STR);
+		$stm->bindValue(':format', es($format), PDO::PARAM_STR);
+		$stm->bindValue(':text', es($text), PDO::PARAM_STR);
+		$stm->bindValue(':url', es($url), PDO::PARAM_STR);
+		$stm->bindValue(':id', es($id), PDO::PARAM_INT);
+
+		$stm->execute();
+	}
+
+
+	//テーブルの指定行の下に一行追加
+	private function _insertTableRow(){
+
+		$tableName = $_POST["tableName"];
+		$id = $_POST["id"];
+
+		$tag = $_POST["tag"];
+		$format = $_POST["format"];
+		$text = $_POST["text"];
+		$url = $_POST["url"];
+
+		switch($tableName){
+				case 'table111':
+					$sql1 = "UPDATE table111 SET id = id+1 WHERE id >:id;";
+					$sql2 = "INSERT INTO table111 (tag,format,text,url,id) VALUES (:tag,:format,:text,:url,:idPlus1);";
+			}
+		$stm1 = $this->pdo->prepare($sql1);
+		$stm2 = $this->pdo->prepare($sql2);
+
+		$stm1->bindValue(':id', es($id), PDO::PARAM_INT);
+
+		$stm2->bindValue(':tag', es($tag), PDO::PARAM_STR);
+		$stm2->bindValue(':format', es($format), PDO::PARAM_STR);
+		$stm2->bindValue(':text', es($text), PDO::PARAM_STR);
+		$stm2->bindValue(':url', es($url), PDO::PARAM_STR);
+		$stm2->bindValue(':idPlus1', es($id+1), PDO::PARAM_INT);
+
+		$stm1->execute();
+		$stm2->execute();
 	}
 }
 

@@ -122,9 +122,9 @@ h1 {
 }
 
 h2 {
-    background-color: #272c3b;
+    background-color: #3d414e;
     color: white;
-    padding: 8px 20px 5px;
+    padding: 8px 20px 8px;
 }
 
 h4 {
@@ -162,6 +162,9 @@ table th {
         color: #b1b0b0;
 
     }
+        .fa {
+            margin: 3px;
+        }
         .fa-minus-square:hover{
             color: #c55959;
             cursor: pointer;
