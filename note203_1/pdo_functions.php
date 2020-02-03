@@ -20,7 +20,8 @@ class PDOfunctions{
 		}
 	}
 
-	//DBからデータの取得
+//DBからデータの取得
+	//書式表
 	public function getTableAll($tableName){
 		// テーブル名にはbindValue出来ないのでswitch文で場合分け
 		switch($tableName){
@@ -31,6 +32,18 @@ class PDOfunctions{
 		$stm->execute();
 		return $stm->fetchAll(\PDO::FETCH_ASSOC);
 	}
+	//サンプルコード
+	public function getSampleCodeAll($tableName){
+		// テーブル名にはbindValue出来ないのでswitch文で場合分け
+		switch($tableName){
+			case 'sample-code110':
+				$sql = "SELECT * FROM `sample-code110` ORDER BY id;";
+		}
+		$stm = $this->pdo->prepare($sql);
+		$stm->execute();
+		return $stm->fetchAll(\PDO::FETCH_ASSOC);
+	}
+
 
 
 	//入力されたフォーム毎の処理の振り分け
@@ -51,10 +64,13 @@ class PDOfunctions{
 
 			case 'insertTableRow':
 				return $this->_insertTableRow();
+
+			case 'updateSampleCode':
+				return $this->_updateSampleCode();
 		}
 	}
 
-
+	//書式表----------------------------------------------------------
 
 	//テーブルの最下行に追加する機能
 	private function _addTableRow(){
@@ -157,6 +173,32 @@ class PDOfunctions{
 		$stm1->execute();
 		$stm2->execute();
 	}
+
+
+
+	//サンプルコード----------------------------------------------------------
+
+	private function _updateSampleCode(){
+
+		$tableName = $_POST["tableName"];
+		$id = $_POST["id"];
+
+		$title = $_POST["title"];
+		$code = $_POST["code"];
+
+		switch($tableName){
+				case 'sample-code110':
+					$sql = "UPDATE `sample-code110` SET title = :title, code = :code WHERE id =:id;";
+			}
+		$stm = $this->pdo->prepare($sql);
+
+		$stm->bindValue(':id', es($id), PDO::PARAM_INT);
+		$stm->bindValue(':title', es($title), PDO::PARAM_STR);
+		$stm->bindValue(':code', es($code), PDO::PARAM_STR);
+
+		$stm->execute();
+	}
+
 }
 
 

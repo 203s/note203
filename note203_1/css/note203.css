@@ -23,18 +23,36 @@ a {
     a:hover {
         color: #072946;
     }
-    .sample h4 {
-        cursor: pointer;
+
+    .sample-title{
+        width: 95%;
+        margin: 0 auto;
+        display: flex;
+        margin-top: 15px;
+        margin-bottom: 5px;
     }
+        .title-title {
+            font-weight: bold;
+            padding: 2px 3px;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .code-form-submit, .code-close{
+            font-size: 12px;
+            padding: 1px 3px;
+            margin-left: 10px;
+            display: inline-block;
+        }
+        .code-id{
+            display: none;
+        }
 
     code {
         font-family: Menlo, Consolas, 'DejaVu Sans Mono', monospace;
       }
     .code-box {
-        margin: 0 80px 0 0px;
-    }
-    .code-box2 {
-        margin: 0 80px 0 0px;
+        width: 95%;
+        margin: 0 auto;
         display: none;
     }
     pre {
@@ -122,13 +140,25 @@ h1 {
 }
 
 h2 {
-    background-color: #3d414e;
-    color: white;
-    padding: 8px 20px 8px;
+    color: #3d3d3d;
+    font-weight: bold;
+    padding-left: 5px;
+    font-size: 20px;
+    margin-bottom: 0;
+    display: inline-block;
+    border-left: 5px solid #5d1445;    
+    
+}
+hr{
+    height: 1px;
+    width: 95%;
+    margin: 30px auto 0px;
+    border: none;
+    border-top:dotted 2px rgb(165, 165, 165);
 }
 
 h4 {
-    margin-left: 20px;
+    margin-left: 2.5%;
 }
 
 .spanh4 {
@@ -156,6 +186,9 @@ table th {
     font-size: 0.9em;
 
 }
+    .id-cell{
+        display: none;
+    }
     .url-cell,
     .edit-cell{
         text-align: center;
@@ -164,6 +197,11 @@ table th {
     }
         .fa {
             margin: 3px;
+            color: #b1b0b0;
+        }
+        .fas{
+            margin-top: 3px;
+            cursor: pointer;
         }
         .fa-minus-square:hover{
             color: #c55959;
@@ -194,6 +232,10 @@ dl {
 dt {
     font-weight: bold;
     margin-bottom: 5px;
+}
+.sample-wrap{
+    width: 95%;
+    margin: 0 auto;
 }
 
 .bgw {

@@ -25,17 +25,77 @@ $(function(){
     });
 
     //アコーディオンパネル
-
+    $('.code-form-submit, .code-close').hide();
     								
-	$('.sample h4').click(function() {
+	$('.title-title').click(function() {
 
-        $(this).next().toggleClass('open');
-	});
+        $(this).parent().next().slideToggle(50);
+    });
+
+    // $('.title-title, .code-close').click(function() {
+
+    //     $(this).parent().next().slideUp(50);
+    //     $('.code-form-submit, .code-close').hide();
+    // });
+
 
 
 });
 
-//「編集行」の表示
+//「サンプル編集アイコン」の表示
+// $(function(){
+//     'use strict';
+    
+//     //デフォルトは非表示
+//     $('.minus2, .pencil2, .plus2').hide();
+
+//     $('.sample-title').mouseover(function(){
+//         $('.minus2, .pencil2, .plus2').show();      
+//     });
+//     $('.sample-title').mouseout(function(){
+//         $('.minus2, .pencil2, .plus2').hide();      
+//     });
+
+//     // if ($('.edit-code-wrap').is(':visible')) {
+//     //     $('.minus2, .pencil2, .plus2').show();      
+//     // } 
+//     // if ($('.add-code-wrap').is(':visible')) {
+//     //     $('.minus2, .pencil2, .plus2').show();      
+//     // } 
+//     // if ($('.code-box').is(':visible')) {
+//     //     $('.minus2, .pencil2, .plus2').show();      
+//     // } 
+// });
+
+
+//「サンプル編集エリア」の表示
+$(function(){
+    'use strict';
+
+    //デフォルトは非表示
+    $('.edit-code-wrap').hide();
+    $('.add-code-wrap').hide();
+
+    $('.pencil2').click(function(){
+        $('.add-code-wrap').hide();      
+        $(this).parent().parent().next().filter('.edit-code-wrap').toggle();
+    });
+    $('.plus2').click(function(){
+        $('.edit-code-wrap').hide();
+        $(this).parent().parent().next().next().filter('.add-code-wrap').toggle();
+    });
+
+    //「サンプル編集エリア」以外をクリックしたら非表示
+    $(document).on('click touchend', function(event) {
+        if (!$(event.target).closest('.pencil2, .plus2, .edit-code-wrap, .add-code-wrap').length) {
+            $('.edit-code-wrap').hide();
+            $('.add-code-wrap').hide();
+        }
+      });
+});
+
+
+//「サンプル編集」の表示
 $(function(){
     'use strict';
 
@@ -43,18 +103,18 @@ $(function(){
     $('.edit-row').hide();
     $('.add-row').hide();
 
-    $('.fa-pencil-square').click(function(){
+    $('.pencil1').click(function(){
         $('.add-row').hide();      
         $(this).closest('.data-row').next().toggle();
     });
-    $('.fa-plus-square').click(function(){
+    $('.plus1').click(function(){
         $('.edit-row').hide();
         $(this).closest('.data-row').next().next().toggle();
     });
 
     //「編集行」以外をクリックしたら非表示
     $(document).on('click touchend', function(event) {
-        if (!$(event.target).closest('.fa-pencil-square, .fa-plus-square, .edit-row, .add-row').length) {
+        if (!$(event.target).closest('.pencil1, .plus1, .edit-row, .add-row').length) {
             $('.edit-row').hide();
             $('.add-row').hide();
         }
@@ -66,7 +126,9 @@ $(function(){
 // ajaxでPOST通信
 //=========================================================================================================
 
-//'addTableRow'(表にの最下行に一行追加)
+
+//書式表-------------------------------------------------------------------------
+//'addTableRow'(表の最下行に一行追加)
 $(function(){
     'use strict';
 
@@ -104,7 +166,7 @@ $(function(){
 //'deleteRow'(表から指定の行削除)
 $(function(){
     'use strict';
-    $('.fa-minus-square').on('click',function(){
+    $('.minus1').on('click',function(){
         // 確認画面
         if(confirm('指定した行を削除しますか？')){
             
@@ -208,5 +270,42 @@ $(function(){
             );
     });
 });
+
+
+
+//サンプルコード-------------------------------------------------------------------------
+//'updateSampleCode'(サンプルコード)
+$(function(){
+    'use strict';
+    $('.code-form-submit').on('click',function(){
+            
+            var tableName = $(this).attr("name");
+            var id = $(this).siblings().filter('.code-id').text();
+            var title = $(this).prev().find('.code-title').text();
+            var code = $(this).parent().next().find('.code-code').text();
+            
+            //ajax処理
+            $.post(
+                '_ajax/php',
+                {
+                    mode: 'updateSampleCode',
+                    tableName: tableName,
+                    id: id,
+                    title: title,
+                    code: code
+                },
+                function(){
+                    // window.location.reload();
+                    console.log('ajaxによるPOST成功');
+                    console.log(tableName);
+                    console.log(id);
+                    console.log(title);
+                    console.log(code);
+
+                },
+            );
+    });
+});
+
 
 

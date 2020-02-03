@@ -65,6 +65,18 @@
   .form-list li input[type="text"]{
     width: 100%;
   }
+.add-code{
+  width: 95%;
+  margin: 0 auto;
+}
+  textarea{
+    width: 100%;
+    margin-top: 5px;
+  }
+  .code-title-form{
+    width: 25%;
+    margin-top: 5px;
+  }
 
 
 /*スクロールバーのデザイン*/

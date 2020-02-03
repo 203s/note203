@@ -26,20 +26,23 @@
 <link rel="stylesheet" href="css/normalize.css">
 <link rel="stylesheet" href="css/note203.css">
 <link rel="stylesheet" href="css/form.css">
-<link rel="stylesheet" href="css/prettify.css"><!-- ソースコードスタイル -->
+<!-- <link rel="stylesheet" href="css/prettify2.css"> -->
+<!-- ソースコードスタイル -->
+<link rel="stylesheet" href="css/desert.css">
 <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700&display=swap" rel="stylesheet">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+<script src="https://kit.fontawesome.com/097e55a36d.js" crossorigin="anonymous"></script>
 <link rel="icon" href="img/icon/証明書アイコン.png">
 <title>note203_server</title>
 <script
-  src="https://code.jquery.com/jquery-2.2.4.min.js"
-  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	src="https://code.jquery.com/jquery-2.2.4.min.js"
+	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script> <!-- jQ本体 -->
-<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script><!-- ソースコードスタイル -->
+<!-- <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>ソースコードスタイル -->
 </head>
 
 
-<body>
+<body onload="PR.prettyPrint()">
 <header>
 <ul class="tabs">
 	<li class="tab current" id="tab-sql"><a href="#sql" style="color: #53001c;">SQL</a></li>
@@ -51,7 +54,7 @@
 		<section class="html">
 		<h1 style="background-color: #5d1614;">SQL</h1>
 		<div class="table">
-			<h4><span class="spanh4">DDL(データ定義言語)</span></h4>
+			<!-- <h4><span class="spanh4">DDL(データ定義言語)</span></h4> -->
 			<!-- 表の表示 ここから-->
 				<table class="format-table" id="format-table1" border="1" cellpadding="5">
 					<tr>
@@ -60,7 +63,7 @@
 						<th>説明</th>
 						<th></th>
 						<th></th>
-						<th>ID</th>
+						<th class="id-cell">ID</th>
 					</tr>
 				<?php 
 					$getTable111 = $connectDB->getTableAll("table111"); 
@@ -81,14 +84,14 @@
 							<a class='kome' href='<?= $row['url'];?>' target='_blank'><?php if($row['url'] != ''){echo ('<i class="fa fa-external-link fa-lg " title="別ウィンドウで参考ページを開く" aria-hidden="true"></i></i>');} ?></a>
 						</td>
 						<td class="edit-cell">
-							<i class="fa fa-minus-square fa-lg " title="この行を削除" name="table111"aria-hidden="true"></i><i class="fa fa-pencil-square fa-lg" title="この行を編集" aria-hidden="true"></i><i class="fa fa-plus-square fa-lg" title="この下に1行追加" aria-hidden="true"></i>
+							<i class="minus1 fa fa-minus-square fa-lg " title="この行を削除" name="table111"aria-hidden="true"></i><i class="pencil1 fa fa-pencil-square fa-lg" title="この行を編集" aria-hidden="true"></i><i class="plus1 fa fa-plus-square fa-lg" title="この下に1行追加" aria-hidden="true"></i>
 						</td>
 						<td class="id-cell"><?= $row['id'] ;?></td>
 					</tr>
 					<tr class="edit-row">
 						<td colspan="5">
 							<form class="add-form" action="">
-								<span>↑上の行を書き換え</span>
+								<span style="color: #74b690; font-weight: bold;">↑上の行を編集</span>
 								<input name="table111" class="edit-form-submit" type="button" value="実行">
 								<ul class="form-list">
 									<li><input type="text" name="tag" value="<?= $row['tag'] ;?>" onclick="this.select();"></li>
@@ -103,7 +106,7 @@
 					<tr class="add-row">
 						<td colspan="5">
 							<form class="add-form" action="">
-								<span>ここに1行追加</span>
+								<span style="color: #5b8bc2; font-weight: bold;">ここに1行追加</span>
 								<input name="table111" class="insert-form-submit" type="button" value="実行">
 								<ul class="form-list">
 									<li><input type="text" name="tag" value="" placeholder="分類"></li>
@@ -122,7 +125,7 @@
 		</div>
 
 <!-- 編集フォーム部品 ここから-->
-		<div class="form-wrap">
+		<!-- <div class="form-wrap">
 			<span class="add-button">行を追加</span>
 			<form id="tableform-id1-1" class="add-form" action="">
 				<table class="add-table" border="1" cellpadding="2">
@@ -132,42 +135,76 @@
 						<td><input type="text" name="text" value="" placeholder="説明"></td>
 						<td><input type="text" name="url" value="" placeholder="参考ページURL"></td>
 					</tr>
-				</table>
+				</table> -->
 				<!-- 送信ボタンのnameを使って出力先のDBのテーブル名を指定 -->
-				<input id="table111" name="table111" class="add-form-submit" type="button" value="追加">
+				<!-- <input id="table111" name="table111" class="add-form-submit" type="button" value="追加">
 			</form>
-		</div>
+		</div> -->
 
 <!-- 編集フォーム部品 ここまで -->
-<div>
-					<h2>サンプル</h2>
-					<ol>
-						<li class="sample">
-							<h4>コロンで区切ったif構文</h4>
-							<div class="code-box2">
-								<pre class="prettyprint">
-									<code class="linenums">
-&lt;?php $age = 25; ?&gt;
 
-&lt;?php if ($age&lt;=15):?&gt;
-15歳以下の料金は500円です。&lt;br&gt;
-&lt;?php  elseif($age&lt;=19):?&gt;
-16歳から19歳は2,000円です。&lt;br&gt;
-&lt;?php else :?&gt;
-20歳以上の大人は2,500円です。&lt;br&gt;
-&lt;?php endif ; ?&gt;
-									</code>
-								</pre>
+<hr>
+
+<!-- サンプルコード ここから -->
+<?php 
+	$getSampleCodeAll110 = $connectDB->getSampleCodeAll("sample-code110"); 
+	// print_r($getSampleCodeAll110);
+?>
+
+			<div class="sample-wrap">
+			<h2 style="border-left: 10px solid #5d1445">CODE</h2>
+					<?php foreach ($getSampleCodeAll110 as $row) :?>
+						<div class="sample">
+							<div class="sample-title">
+								<div class="title-title">
+										<img clas="mark1" src="img/icon/mark1.png" width="10px">
+										<span class="code-title"><?= $row['title'] ;?></span>
+								</div>
+								<i class="minus2 fa fa-minus-square" title="このサンプルを削除" name="table111"aria-hidden="true"></i><i class="pencil2 fa fa-pencil-square" title="このサンプルを編集" aria-hidden="true"></i><i class="plus2 fa fa-plus-square" title="この下にサンプルを新規追加" aria-hidden="true"></i>
+								<span class="code-id"><?= $row['id'] ;?></span>
 							</div>
-						</li>
-						</ol>
-				</div>
-		</section>
-</div>zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+							<div class="code-box">
+								<pre class="prettyprint linenums">
+<code class="code-code"><?= $row['code'] ;?></code>
+								</pre>
+							</div><!-- "code-box" -->
+						</div><!-- "sample" -->
+						<?php endforeach; ?>
+<!-- サンプルコード ここまで -->
+
+<!-- サンプルコード編集フォーム ここから -->
+						<div class="edit-code-wrap">
+							<form class="add-code" action="">
+								<span style="color: #74b690; font-weight: bold;">
+									↑上のサンプルを編集
+								</span>
+								<br>
+								<input class="code-title-form" type="text" name="title" placeholder="タイトル">
+								<br>
+								<textarea name="code" rows="4" placeholder="コードをペースト"	cols="40"></textarea>
+							</form>
+						</div>
+						<div class="add-code-wrap">
+							<form class="add-code" action="">
+								<span style="color: #5b8bc2; font-weight: bold;">
+									ここにサンプルを新規追加
+								</span>
+								<br>
+								<input class="code-title-form" type="text" name="title" placeholder="タイトル">
+								<br>
+								<textarea name="code" rows="4" placeholder="コードをペースト"	cols="40"></textarea>
+							</form>
+						</div>
+<!-- サンプルコード編集フォーム ここまで -->
+			</div>
+
+	</div>
 </main>
 
 
 <script src="js/jq.js"></script>
+<script src="js/prettify.js"></script>
+<!-- <script src="js/textWithLF.js"></script> -->
 
 </body>
 
