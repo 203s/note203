@@ -45,12 +45,17 @@
 
 /* 行内編集フォーム */
 .edit-row,.add-row{
-  background-color: #eee;
   width: 95%;
   height: 30px;
   margin: 0 auto;
   border-left: solid black 1px;
   border-right: solid black 1px;
+}
+.edit-row{
+  background-color: rgb(239, 245, 238);
+}
+.add-row{
+  background-color: rgb(240, 243, 247);
 }
   .form-list{
     display: flex;

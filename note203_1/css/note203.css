@@ -176,13 +176,14 @@ table td {
 
 table th {
     color: #5c5c5c;
+    border:solid 1px rgb(199, 199, 199);
 }
 
 .format-table,
 .format-table,
 .format-table td {
     border-collapse: collapse;
-    border-color: rgb(199, 199, 199);
+    border:solid 1px rgb(199, 199, 199);
     font-size: 0.9em;
 
 }

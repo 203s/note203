@@ -45,14 +45,14 @@
 <body onload="PR.prettyPrint()">
 <header>
 <ul class="tabs">
-	<li class="tab current" id="tab-sql"><a href="#sql" style="color: #53001c;">SQL</a></li>
-	<li class="tab" id="tab-php"><a href="#php" style="color: #53001c;">PHP</a></li>
+	<li class="tab current" id="tab-sql"><a href="#sql" style="color: #004053;">SQL</a></li>
+	<li class="tab" id="tab-php"><a href="#php" style="color: #004053;">PHP</a></li>
 </ul>
 </header>
 <main>
 	<div id="sql">
 		<section class="html">
-		<h1 style="background-color: #5d1614;">SQL</h1>
+		<h1 style="background-color: #004053;">SQL</h1>
 		<div class="table">
 			<!-- <h4><span class="spanh4">DDL(データ定義言語)</span></h4> -->
 			<!-- 表の表示 ここから-->
@@ -94,10 +94,10 @@
 								<span style="color: #74b690; font-weight: bold;">↑上の行を編集</span>
 								<input name="table111" class="edit-form-submit" type="button" value="実行">
 								<ul class="form-list">
-									<li><input type="text" name="tag" value="<?= $row['tag'] ;?>" onclick="this.select();"></li>
-									<li><input type="text" name="format" value="<?= $row['format'] ;?>" onclick="this.select();"></li>
-									<li><input type="text" name="text" value="<?= $row['text'] ;?>" onclick="this.select();"></li>
-									<li><input type="text" name="url" value="<?= $row['url'];?>" onclick="this.select();"></li>
+									<li><input type="text" name="tag" value="<?= $row['tag'] ;?>" onclick="this.select();"placeholder="分類"></li>
+									<li><input type="text" name="format" value="<?= $row['format'] ;?>" onclick="this.select();" placeholder="書式"></li>
+									<li><input type="text" name="text" value="<?= $row['text'] ;?>" onclick="this.select();" placeholder="説明"></li>
+									<li><input type="text" name="url" value="<?= $row['url'];?>" onclick="this.select();" placeholder="参考ページURL"></li>
 								</ul>
 								
 							</form>
@@ -152,57 +152,58 @@
 ?>
 
 			<div class="sample-wrap">
-			<h2 style="border-left: 10px solid #5d1445">CODE</h2>
-					<?php foreach ($getSampleCodeAll110 as $row) :?>
-						<div class="sample">
-							<div class="sample-title">
-								<div class="title-title">
-										<img clas="mark1" src="img/icon/mark1.png" width="10px">
-										<span class="code-title"><?= $row['title'] ;?></span>
+				<h2 style="border-left: 10px solid #004053">CODE</h2>
+						<?php foreach ($getSampleCodeAll110 as $row) :?>
+							<div class="sample">
+								<div class="sample-title">
+									<div class="title-title">
+											<img clas="mark1" src="img/icon/mark1.png" width="10px">
+											<span class="code-title"><?= $row['title'] ;?></span>
+									</div>
+									<i class="minus2 fa fa-minus-square" title="このサンプルを削除" name="table111"aria-hidden="true"></i><i class="pencil2 fa fa-pencil-square" title="このサンプルを編集" aria-hidden="true"></i><i class="plus2 fa fa-plus-square" title="この下にサンプルを新規追加" aria-hidden="true"></i>
+									<span class="code-id"><?= $row['id'] ;?></span>
 								</div>
-								<i class="minus2 fa fa-minus-square" title="このサンプルを削除" name="table111"aria-hidden="true"></i><i class="pencil2 fa fa-pencil-square" title="このサンプルを編集" aria-hidden="true"></i><i class="plus2 fa fa-plus-square" title="この下にサンプルを新規追加" aria-hidden="true"></i>
-								<span class="code-id"><?= $row['id'] ;?></span>
-							</div>
-							<div class="code-box">
-								<pre class="prettyprint linenums">
-<code class="code-code"><?= $row['code'] ;?></code>
-								</pre>
-							</div><!-- "code-box" -->
-						</div><!-- "sample" -->
-						<?php endforeach; ?>
-<!-- サンプルコード ここまで -->
+								<div class="code-box">
+									<pre class="prettyprint linenums">
+									<code class="code-code"><?= $row['code'] ;?></code>
+									</pre>
+								</div><!-- "code-box" -->
+							</div><!-- "sample" -->
+							<?php endforeach; ?>
+	<!-- サンプルコード ここまで -->
 
-<!-- サンプルコード編集フォーム ここから -->
-						<div class="edit-code-wrap">
-							<form class="add-code" action="">
-								<span style="color: #74b690; font-weight: bold;">
-									↑上のサンプルを編集
-								</span>
-								<br>
-								<input class="code-title-form" type="text" name="title" placeholder="タイトル">
-								<br>
-								<textarea name="code" rows="4" placeholder="コードをペースト"	cols="40"></textarea>
-							</form>
-						</div>
-						<div class="add-code-wrap">
-							<form class="add-code" action="">
-								<span style="color: #5b8bc2; font-weight: bold;">
-									ここにサンプルを新規追加
-								</span>
-								<br>
-								<input class="code-title-form" type="text" name="title" placeholder="タイトル">
-								<br>
-								<textarea name="code" rows="4" placeholder="コードをペースト"	cols="40"></textarea>
-							</form>
-						</div>
-<!-- サンプルコード編集フォーム ここまで -->
+	<!-- サンプルコード編集フォーム ここから -->
+							<div class="edit-code-wrap">
+								<form class="add-code" action="">
+									<span style="color: #74b690; font-weight: bold;">
+										↑上のサンプルを編集
+									</span>
+									<br>
+									<input class="code-title-form" type="text" name="title" placeholder="タイトル">
+									<br>
+									<textarea name="code" rows="4" placeholder="コードをペースト"	cols="40"></textarea>
+								</form>
+							</div>
+							<div class="add-code-wrap">
+								<form class="add-code" action="">
+									<span style="color: #5b8bc2; font-weight: bold;">
+										ここにサンプルを新規追加
+									</span>
+									<br>
+									<input class="code-title-form" type="text" name="title" placeholder="タイトル">
+									<br>
+									<textarea name="code" rows="4" placeholder="コードをペースト"	cols="40"></textarea>
+								</form>
+							</div>
+	<!-- サンプルコード編集フォーム ここまで -->
 			</div>
 
 	</div>
 </main>
 
 
-<script src="js/jq.js"></script>
+<script src="js/display_jq.js"></script>
+<script src="js/ajax_jq.js"></script>
 <script src="js/prettify.js"></script>
 <!-- <script src="js/textWithLF.js"></script> -->
 
