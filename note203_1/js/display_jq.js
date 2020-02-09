@@ -40,8 +40,8 @@ $(function(){
     $('.pencil1').click(function(){
         $('.add-row').hide();      
         $(this).closest('.data-row').next().toggle();
-        $(this).togglec
     });
+    
     $('.plus1').click(function(){
         $('.edit-row').hide();
         $(this).closest('.data-row').next().next().toggle();
@@ -49,7 +49,7 @@ $(function(){
 
     //「編集行」以外をクリックしたら非表示
     $(document).on('click touchend', function(event) {
-        if (!$(event.target).closest('.pencil1, .plus1, .edit-row, .add-row').length) {
+        if (!$(event.target).closest('tbody').length) {
             $('.edit-row').hide();
             $('.add-row').hide();
         }
@@ -57,14 +57,41 @@ $(function(){
 });
 
 
+//「MEMO」編集行の表示
+$(function(){
+    'use strict';
+
+    //デフォルトは非表示
+    $('.edit-memo-wrap').hide();
+    $('.add-memo-wrap').hide();
+
+    $('.pencil-memo').click(function(){
+        $('.add-memo-wrap').hide();      
+        $(this).parent().next().filter('.edit-memo-wrap').toggle();
+    });
+    $('.plus-memo').click(function(){
+        $('.edit-memo-wrap').hide();
+        $(this).parent().next().next().filter('.add-memo-wrap').toggle();
+    });
+
+    //「サンプル編集エリア」以外をクリックしたら非表示
+    $(document).on('click touchend', function(event) {
+        if (!$(event.target).closest('.pencil-memo, .plus-memo, .edit-memo-wrap, .add-memo-wrap').length) {
+            $('.edit-memo-wrap').hide();
+            $('.add-memo-wrap').hide();
+        }
+      });
+});
 
 
-//「サンプル」アコーディオンパネル
+
+//「サンプルコード」アコーディオンパネル
     $('.code-form-submit, .code-close').hide();
     								
 	$('.title-title').click(function() {
 
-        $(this).parent().next().slideToggle(50);
+        $(this).parent().next().slideToggle(100);
+        $(this).find('.mark1').toggleClass("after");
     });
 
     // $('.title-title, .code-close').click(function() {
@@ -113,11 +140,11 @@ $(function(){
 
     $('.pencil2').click(function(){
         $('.add-code-wrap').hide();      
-        $(this).parent().parent().next().filter('.edit-code-wrap').toggle();
+        $(this).parent().next().next().filter('.edit-code-wrap').toggle();
     });
     $('.plus2').click(function(){
         $('.edit-code-wrap').hide();
-        $(this).parent().parent().next().next().filter('.add-code-wrap').toggle();
+        $(this).parent().next().next().next().filter('.add-code-wrap').toggle();
     });
 
     //「サンプル編集エリア」以外をクリックしたら非表示

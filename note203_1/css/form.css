@@ -63,25 +63,58 @@
     padding: 0;
   }
 
-  .form-list li {
-    width: 23%;
-    margin-left: 12px;
-  }
+    .tag-input ,
+    .url-input {
+      width: 11%;
+      margin-left: 12px;
+    }
+    .format-input ,
+    .text-input {
+      width: 35%;
+      margin-left: 12px;
+    }
   .form-list li input[type="text"]{
     width: 100%;
   }
+
+.add-memo{
+  width: 95%;
+  margin: 0 auto;
+}
+  .memo-text-form{
+    width: 70%;
+  }
+  .memo-url-form{
+    width: 20%;
+  }
+
 .add-code{
   width: 95%;
   margin: 0 auto;
 }
   textarea{
     width: 100%;
-    margin-top: 5px;
+    margin-top: 10px;
   }
   .code-title-form{
-    width: 25%;
+    width: 100%;
     margin-top: 5px;
+    
   }
+
+  .minus2, .pencil2, .plus2{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    position: relative;
+    top: 5px;
+}
+  .minus-memo, .pencil-memo, .plus-memo, .link-memo{
+    margin-bottom: 0;
+    padding-bottom: 0;
+    position: relative;
+    top: 5px;
+  }
+
 
 
 /*スクロールバーのデザイン*/
@@ -97,4 +130,5 @@
   border-radius: 10px;
   box-shadow: inset 0 0 0 2px #fff;
 }
+
 

@@ -7,9 +7,11 @@ body {
 main {
     width: 96%;
     max-width: 1000px;
+    padding-bottom: 500px;
     margin: 0 auto;
     font-size: 11pt;
     color: #222;
+
 }
 
 a {
@@ -24,37 +26,6 @@ a {
         color: #072946;
     }
 
-    .sample-title{
-        width: 95%;
-        margin: 0 auto;
-        display: flex;
-        margin-top: 15px;
-        margin-bottom: 5px;
-    }
-        .title-title {
-            font-weight: bold;
-            padding: 2px 3px;
-            cursor: pointer;
-            display: inline-block;
-        }
-        .code-form-submit, .code-close{
-            font-size: 12px;
-            padding: 1px 3px;
-            margin-left: 10px;
-            display: inline-block;
-        }
-        .code-id{
-            display: none;
-        }
-
-    code {
-        font-family: Menlo, Consolas, 'DejaVu Sans Mono', monospace;
-      }
-    .code-box {
-        width: 95%;
-        margin: 0 auto;
-        display: none;
-    }
     pre {
         line-height: 1.5;
     }
@@ -66,7 +37,9 @@ header {
     height:50px;
     background-color: #ffffff;
     padding-top: 1px;
+    border-bottom: #072946 solid 7px;
     margin-bottom: 60px;
+    
 }
 .tabs {
     display: flex;
@@ -79,7 +52,7 @@ header {
 .tab {
     /* top: 5px; */
     position: relative;
-    width: 15%;
+    width: 10%;
     min-width: 80px;
     max-width: 160px;
     text-align: center;
@@ -88,7 +61,7 @@ header {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     box-shadow: 4px 0px 0px 0px #b5b5b5;
-    color: #175848;
+    color: #ffffff;
     font-weight: bolder;
 }
     .tab:hover {
@@ -99,6 +72,7 @@ header {
         display: block;
         width: 100%;
         height: 100%;
+        color: #fff;
     }
         .tab>a:hover {
             transform: scaleY(0.9);
@@ -106,6 +80,8 @@ header {
 
         }
 .current {
+    /* transform: scaleY(1.2);
+    transform-origin: bottom; */
     background-color: #e6e6e6;
     z-index: 2;
 }
@@ -115,7 +91,8 @@ header {
     border-radius: 8px;
     box-shadow: 5px 5px 1px  rgba(0, 0, 0, 0.3);
     padding-top: 0;
-    padding-bottom: 30px;
+    padding-bottom: 60px;
+    margin-top: 100px;
     margin-bottom: 30px;
 }
 .others {
@@ -133,6 +110,7 @@ h1 {
     padding: 16px 20px 12px;
     border-radius: 8px 8px 0 0;
     margin-top: 0;
+    margin-bottom: 40px;
 }
 .h1css {
     background-color: #5d1445;
@@ -152,9 +130,9 @@ h2 {
 hr{
     height: 1px;
     width: 95%;
-    margin: 30px auto 0px;
+    margin: 45px auto 0px;
     border: none;
-    border-top:dotted 2px rgb(165, 165, 165);
+    border-top:dotted 2.5px rgb(165, 165, 165);
 }
 
 h4 {
@@ -198,11 +176,14 @@ table th {
     }
         .fa {
             margin: 3px;
-            color: #b1b0b0;
+            color: #c5c5c5;
         }
         .fas{
             margin-top: 3px;
             cursor: pointer;
+        }
+        .fa-external-link:hover{
+            color: #3d3d3d;
         }
         .fa-minus-square:hover{
             color: #c55959;
@@ -216,6 +197,11 @@ table th {
             color: #5b8bc2;
             cursor: pointer;
         }
+.mark2{
+    margin-right: 5
+    px;
+}
+
 ul:not(ol)  {
     list-style-image: url('../img/marker-gray.png');
 
@@ -256,7 +242,105 @@ dt {
 .pdflink ul:nth-child(2) {
     position: absolute;
     left: 50%;
+
+
 }
+.memo-wrap{
+    width: 95%;
+    margin: 0 auto;
+}
+
+.memo-line{
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 0;
+    line-height: 1.7;
+    border-bottom: 0.5px solid #e2e2e2;
+
+}
+    .memo-text-wrap {
+        width: 95%;
+        font-weight: normal;
+        padding: 2px 0;
+        display: inline-block;
+    }
+        .mark2{
+            color: #3d3d3d;
+            width: 5px;
+        }
+        .memo-text{
+            font-size: 14px;
+        }
+       .code-form-submit, .code-close{
+        font-size: 12px;
+        padding: 1px 3px;
+        margin-left: 10px;
+        display: inline-block;
+    }
+    .edit-memo-submit, .insert-memo-submit{
+        font-size: 0.9em;
+    }
+    .memo-id{
+        display: none;
+    }
+
+
+
+.sample-title{
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 0;
+    line-height: 1.7;
+    border-bottom: 0.5px solid #e2e2e2;
+
+}
+    .title-title {
+        width: 95%;
+        font-weight: bold;
+        padding: 2px 0;
+        cursor: pointer;
+        display: inline-block;
+    }
+        .mark1{
+            width: 10px;
+            transition-duration: 0.1s;
+        }
+        img.after{
+            transform: rotate(90deg);
+        }
+        .code-title{
+            font-size: 14px;
+        }
+    .code-form-submit, .code-close{
+        font-size: 12px;
+        padding: 1px 3px;
+        margin-left: 10px;
+        display: inline-block;
+    }
+    .edit-code-submit, .insert-code-submit{
+        font-size: 0.9em;
+    }
+    .code-id{
+        display: none;
+    }
+
+code {
+    font-family: Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+    font-size: 13px;
+  }
+.code-box {
+    width: 95%;
+    margin: 0 auto;
+    display: none;
+}
+    .minus2, .pencil2, .plus2{
+        line-height: 1;
+        padding-bottom: 0;
+    }
 .hide {
     display: none;
 }
